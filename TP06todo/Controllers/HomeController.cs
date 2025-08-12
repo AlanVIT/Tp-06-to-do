@@ -15,6 +15,33 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        idUsuario = HttpContext.Session.GetInt("IdUsuario");
+        List<Tarea> tareas = BD.verTareas(idUsuario.Value);
+        return View(tareas);
+    }
+
+    public IActionResult mostrarAgregarTarea(){
+
+        return View("agregarTarea");
+
+    }
+    public IActionResult agregarTarea(string descripcion, bool finalizada, string titulo, DateTime fecha)
+    {
+        idUsuario = HttpContext.Session.GetInt("IdUsuario");
+        BD.agregarTarea(descripcion, finalizada, idUsuario, titulo, fecha);
+
+        return RedirectToAction("Index");
+    }
+        public IActionResult mostrarEliminarTarea(){
+
+        return View("agregarTarea");
+
+    }
+    public IActionResult eliminarTarea(string descripcion, bool finalizada, string titulo, DateTime fecha)
+    {
+        idUsuario = HttpContext.Session.GetInt("IdUsuario");
+        BD.eliminarTarea(descripcion, finalizada, idUsuario, titulo, fecha);
+
+        return RedirectToAction("Index");
     }
 }

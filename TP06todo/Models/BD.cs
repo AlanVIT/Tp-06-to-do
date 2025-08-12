@@ -22,9 +22,18 @@ public static class BD
         return id;
     }
 
-    public static void agregarTarea(int id, string descripcion, bool finalizada, string idUsuario, string titulo, DateTime fecha )
+    public static void RegistrarUsuario(string nombre, string apellido, string usuario, string password, string foto, DateTime fecha)
+    {
+        string query = "INSERT INTO Usuario (nombre, apellido, usuario, password, foto, fecha) VALUES (@pNombre, @pApellido, @pUsuario, @pPassword, @pFoto, @pFecha)";
+        using(SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            connection.Execute(query, new { pNombre = nombre, pApellido = apellido, pUsuario = usuario, pPassword = password, pFoto = foto, pFecha = fecha });
+        }
+    }
+
+    public static void agregarTarea(string descripcion, bool finalizada, string idUsuario, string titulo, DateTime fecha )
     {   
-        string query = "INSERT INTO Tarea (id, descripcion, fecha,  finalizada, idUsuario, titulo ) VALUES (@pid, @pdescripcion, @pfecha,  @pfinalizada, @pidUsuario, @ptitulo) ";
+        string query = "INSERT INTO Tarea (descripcion, fecha,  finalizada, idUsuario, titulo ) VALUES (@pid, @pdescripcion, @pfecha,  @pfinalizada, @pidUsuario, @ptitulo) ";
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
             connection.Execute(query, new {pid = id, pdescripcion = descripcion, pfecha = fecha, pfinalizada = finalizada, pidUsuario = idUsuario, ptitulo = titulo});
@@ -40,7 +49,7 @@ public static class BD
         }
     }
 
-    public static void modificarTarea(int id, string descripcion, bool finalizada, string idUsuario, string titulo, DateTime fecha )
+    public static void modificarTarea(int id, string descripcion, bool finalizada, int idUsuario, string titulo, DateTime fecha )
     {   
         string query = "UPDATE Tarea SET descripcion = @pdescripcion, fecha = @pfecha, finalizada = @pfinalizada, idUsuario = @pidUsuario, titulo = @ptitulo WHERE id = @pid";
         using(SqlConnection connection = new SqlConnection(_connectionString))

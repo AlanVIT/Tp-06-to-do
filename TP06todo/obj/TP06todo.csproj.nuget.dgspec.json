@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\49319580\\Downloads\\Tp 06 to do\\TP06todo\\TP06todo.csproj": {}
+    "C:\\Users\\49319580\\Tp-06-to-do\\TP06todo\\TP06todo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\49319580\\Downloads\\Tp 06 to do\\TP06todo\\TP06todo.csproj": {
+    "C:\\Users\\49319580\\Tp-06-to-do\\TP06todo\\TP06todo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\49319580\\Downloads\\Tp 06 to do\\TP06todo\\TP06todo.csproj",
+        "projectUniqueName": "C:\\Users\\49319580\\Tp-06-to-do\\TP06todo\\TP06todo.csproj",
         "projectName": "TP06todo",
-        "projectPath": "C:\\Users\\49319580\\Downloads\\Tp 06 to do\\TP06todo\\TP06todo.csproj",
+        "projectPath": "C:\\Users\\49319580\\Tp-06-to-do\\TP06todo\\TP06todo.csproj",
         "packagesPath": "C:\\Users\\49319580\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\49319580\\Downloads\\Tp 06 to do\\TP06todo\\obj\\",
+        "outputPath": "C:\\Users\\49319580\\Tp-06-to-do\\TP06todo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,8 +43,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -62,7 +61,7 @@
               "target": "Package",
               "version": "[6.0.2, )"
             },
-            "NewtonSoft.Json": {
+            "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
             }
@@ -86,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
