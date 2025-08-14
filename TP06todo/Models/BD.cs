@@ -31,16 +31,23 @@ public static class BD
         }
     }
 
-    public static void agregarTarea(string descripcion, bool finalizada, string idUsuario, string titulo, DateTime fecha )
-    {   
-        string query = "INSERT INTO Tarea (descripcion, fecha,  finalizada, idUsuario, titulo ) VALUES (@pid, @pdescripcion, @pfecha,  @pfinalizada, @pidUsuario, @ptitulo) ";
-        using(SqlConnection connection = new SqlConnection(_connectionString))
+        public static void AgregarTarea(string descripcion, bool finalizada, int idUsuario, string titulo, DateTime fecha)
         {
-            connection.Execute(query, new {pid = id, pdescripcion = descripcion, pfecha = fecha, pfinalizada = finalizada, pidUsuario = idUsuario, ptitulo = titulo});
+            string query = "INSERT INTO Tarea (descripcion, fecha, finalizada, idUsuario, titulo) VALUES (@pdescripcion, @pfecha, @pfinalizada, @pidUsuario, @ptitulo)";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute(query, new {
+                    pdescripcion = descripcion,
+                    pfecha = fecha,
+                    pfinalizada = finalizada,
+                    pidUsuario = idUsuario,
+                    ptitulo = titulo
+                });
+            }
         }
-    }
 
-     public static void eliminarTarea(int id)
+
+     public static void EliminarTarea(int id)
     {
         string query = "DELETE Tarea WHERE id = @pid ";
         using(SqlConnection connection = new SqlConnection(_connectionString))
@@ -49,7 +56,7 @@ public static class BD
         }
     }
 
-    public static void modificarTarea(int id, string descripcion, bool finalizada, int idUsuario, string titulo, DateTime fecha )
+    public static void ModificarTarea(int id, string descripcion, bool finalizada, int idUsuario, string titulo, DateTime fecha )
     {   
         string query = "UPDATE Tarea SET descripcion = @pdescripcion, fecha = @pfecha, finalizada = @pfinalizada, idUsuario = @pidUsuario, titulo = @ptitulo WHERE id = @pid";
         using(SqlConnection connection = new SqlConnection(_connectionString))
@@ -58,33 +65,42 @@ public static class BD
         }
     }
 
-    public static List<Tarea> verTareas(int id)
+    public static List<Tarea> VerTareas(int id)
     {
         List<Tarea> listaTareas = new List<Tarea>();
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
-            string query = "SELECT Tarea.id, Tarea.descripcion, Tarea.fecha,  Tarea.finalizada, Tarea.idUsuario, Tarea.titulo FROM Usuario INNER JOIN Tarea ON Usuario.id = @pid";
+            string query = "SELECT * FROM Tarea WHERE idUsuario = @pid";
             listaTareas = connection.Query<Tarea>(query, new { pid = id}).ToList();
         }
         return listaTareas;
     }
+    public static Tarea VerTarea(int id)
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = "SELECT * FROM Tarea WHERE Tarea.id = @pid";
+            return connection.QueryFirstOrDefault<Tarea>(query, new { pid = id });
+        }
+    }
 
-    public static void finalizarTarea(int id)
-    {   
-        string query = "UPDATE Tarea SET finalizada = 1";
-        using(SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            connection.Execute(query, new {pid = id});
-        }
+public static void FinalizarTarea(int id)
+{
+    string query = "UPDATE Tarea SET finalizada = 1 WHERE id = @pid";
+    using (SqlConnection connection = new SqlConnection(_connectionString))
+    {
+        connection.Execute(query, new { pid = id });
     }
-    public static void actualizarFecha(int id, DateTime nuevaFecha)
-    {   
-        string query = "UPDATE Tarea SET fecha = @pnuevaFecha";
-        using(SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            connection.Execute(query, new {pid = id, pnuevaFecha = nuevaFecha});
-        }
+}
+
+public static void ActualizarFecha(int id, DateTime nuevaFecha)
+{
+    string query = "UPDATE Tarea SET fecha = @pnuevaFecha WHERE id = @pid";
+    using (SqlConnection connection = new SqlConnection(_connectionString))
+    {
+        connection.Execute(query, new { pid = id, pnuevaFecha = nuevaFecha });
     }
+}
 
     
 

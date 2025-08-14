@@ -1,47 +1,65 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TP06todo.Models;
 
-namespace TP06todo.Controllers;
-
-public class HomeController : Controller
+namespace TP06todo.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
 
-    public IActionResult Index()
-    {
-        idUsuario = HttpContext.Session.GetInt("IdUsuario");
-        List<Tarea> tareas = BD.verTareas(idUsuario.Value);
-        return View(tareas);
-    }
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
-    public IActionResult mostrarAgregarTarea(){
+        public IActionResult Index()
+        {
+            int idUsuario = HttpContext.Session.GetInt32("IdUsuario");
+            if (idUsuario is null || idUsuario <= 0)
+                return RedirectToAction("Login", "Account");
 
-        return View("agregarTarea");
+            int tareas = BD.VerTareas(idUsuario.Value);
+            return View("Tareas", tareas);
+        }
 
-    }
-    public IActionResult agregarTarea(string descripcion, bool finalizada, string titulo, DateTime fecha)
-    {
-        idUsuario = HttpContext.Session.GetInt("IdUsuario");
-        BD.agregarTarea(descripcion, finalizada, idUsuario, titulo, fecha);
+        [HttpGet]
+        public IActionResult MostrarAgregarTarea()
+        {
+            return View("AgregarTarea");
+        }
 
-        return RedirectToAction("Index");
-    }
-        public IActionResult mostrarEliminarTarea(){
+        [HttpPost]
+        public IActionResult AgregarTarea(string descripcion, bool finalizada, string titulo, DateTime fecha)
+        {
+            int idUsuario = HttpContext.Session.GetInt32("IdUsuario");
+            if (idUsuario == null){
+                return RedirectToAction("Login", "Account");
 
-        return View("agregarTarea");
+            }
 
-    }
-    public IActionResult eliminarTarea(string descripcion, bool finalizada, string titulo, DateTime fecha)
-    {
-        idUsuario = HttpContext.Session.GetInt("IdUsuario");
-        BD.eliminarTarea(descripcion, finalizada, idUsuario, titulo, fecha);
+            BD.AgregarTarea(descripcion, finalizada, idUsuario.Value, titulo, fecha);
+            return RedirectToAction("Index");
+        }
 
-        return RedirectToAction("Index");
+        [HttpGet]
+        public IActionResult MostrarEliminarTarea(int id)
+        {
+            int tarea = BD.VerTarea(id);
+            return View("EliminarTarea", tarea);
+        }
+
+        [HttpPost]
+        public IActionResult EliminarTarea(int id)
+        {
+            BD.EliminarTarea(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult VerTarea(int id)
+        {
+            int tarea = BD.VerTarea(id);
+            return View("Tarea", tarea);
+        }
     }
 }
