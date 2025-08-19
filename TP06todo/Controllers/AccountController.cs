@@ -22,13 +22,8 @@ namespace TP06todo.Controllers
         public IActionResult Login(string usuario, string password)
         {
             int idUsuario = BD.Login(usuario, password);
-            if (idUsuario <= 0)
-            {
-                TempData["Error"] = "Usuario o contraseña inválidos.";
-                return View("Login");
-            }
-
-            HttpContext.Session.SetInt32("IdUsuario", idUsuario);
+            
+            HttpContext.Session.SetString("IdUsuario", idUsuario.ToString());
             return RedirectToAction("Index", "Home");
         }
 
