@@ -14,12 +14,9 @@ namespace TP06todo.Controllers
 
         public IActionResult Index()
         {
-            int idUsuario = HttpContext.Session.GetInt32("IdUsuario");
-            if (idUsuario is null || idUsuario <= 0)
-                return RedirectToAction("Login", "Account");
-
-            int tareas = BD.VerTareas(idUsuario.Value);
-            return View("Tareas", tareas);
+            int idUsuario = int.Parse(HttpContext.Session.GetString("IdUsuario"));
+            ViewBag.tareas = BD.VerTareas(idUsuario);
+            return View("Tareas");
         }
 
         [HttpGet]
@@ -31,21 +28,9 @@ namespace TP06todo.Controllers
         [HttpPost]
         public IActionResult AgregarTarea(string descripcion, bool finalizada, string titulo, DateTime fecha)
         {
-            int idUsuario = HttpContext.Session.GetInt32("IdUsuario");
-            if (idUsuario == null){
-                return RedirectToAction("Login", "Account");
-
-            }
-
-            BD.AgregarTarea(descripcion, finalizada, idUsuario.Value, titulo, fecha);
+            int idUsuario = int.Parse(HttpContext.Session.GetString("IdUsuario"));
+            BD.AgregarTarea(descripcion, finalizada, idUsuario, titulo, fecha);
             return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public IActionResult MostrarEliminarTarea(int id)
-        {
-            int tarea = BD.VerTarea(id);
-            return View("EliminarTarea", tarea);
         }
 
         [HttpPost]
@@ -58,8 +43,46 @@ namespace TP06todo.Controllers
         [HttpGet]
         public IActionResult VerTarea(int id)
         {
-            int tarea = BD.VerTarea(id);
-            return View("Tarea", tarea);
+            ViewBag.tarea = BD.VerTarea(id);
+            return View("Tarea");
         }
+
+        [HttpGet]
+        public IActionResult VerTareas()
+        {
+            int idUsuario = int.Parse(HttpContext.Session.GetString("IdUsuario"));
+            ViewBag.tarea = BD.VerTarea(idUsuario);
+            return View("Tarea");
+        }
+
+        [HttpGet]
+        public IActionResult modificarTarea(int id, string descripcion, bool finalizada, string titulo, DateTime fecha)
+        {
+            int idUsuario = int.Parse(HttpContext.Session.GetString("IdUsuario"));
+            BD.ModificarTarea(id, descripcion, finalizada, idUsuario, titulo, fecha );
+            return View("Tarea");
+        }
+
+        [HttpGet]
+        public IActionResult mostrarFinalizarTarea(int id)
+        {
+            BD.FinalizarTarea(id);
+            return View("Tarea");
+        }
+
+        [HttpGet]
+        public IActionResult finalizarTarea(int id)
+        {
+            BD.FinalizarTarea(id);
+            return View("Tarea");
+        }
+
+        [HttpGet]
+        public IActionResult actualizarFecha(int id)
+        {
+            BD.FinalizarTarea(id);
+            return View("Tarea");
+        }
+
     }
 }
