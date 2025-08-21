@@ -15,8 +15,15 @@ namespace TP06todo.Controllers
         public IActionResult Index()
         {
             var session = HttpContext.Session.GetString("IdUsuario");
-            int idUsuario = int.Parse(session);
-            ViewBag.tareas = BD.VerTareas(idUsuario);
+            if(session == null){
+
+                return View("Login");
+
+            }
+            else{
+                int idUsuario = int.Parse(session);
+                ViewBag.tareas = BD.VerTareas(idUsuario);
+            }
             return View("Tareas");
         }
 
