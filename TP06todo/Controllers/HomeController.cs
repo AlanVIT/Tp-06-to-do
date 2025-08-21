@@ -14,7 +14,8 @@ namespace TP06todo.Controllers
 
         public IActionResult Index()
         {
-            int idUsuario = int.Parse(HttpContext.Session.GetString("IdUsuario"));
+            var session = HttpContext.Session.GetString("IdUsuario");
+            int idUsuario = int.Parse(session);
             ViewBag.tareas = BD.VerTareas(idUsuario);
             return View("Tareas");
         }
@@ -28,7 +29,8 @@ namespace TP06todo.Controllers
         [HttpPost]
         public IActionResult AgregarTarea(string descripcion, bool finalizada, string titulo, DateTime fecha)
         {
-            int idUsuario = int.Parse(HttpContext.Session.GetString("IdUsuario"));
+            var session = HttpContext.Session.GetString("IdUsuario");
+            int idUsuario = int.Parse(session);
             BD.AgregarTarea(descripcion, finalizada, idUsuario, titulo, fecha);
             return RedirectToAction("Index");
         }
