@@ -15,11 +15,11 @@ namespace TP06todo.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View("Login");
+            return View("salaLogin");
         }
 
         [HttpPost]
-        public IActionResult Login(string usuario, string password)
+        public IActionResult verificarLogin(string usuario, string password)
         {
             int idUsuario = BD.Login(usuario, password);
             

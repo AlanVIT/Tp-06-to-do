@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Index";
+}
+
+<Form action = '@Url.Action("verificarLogin", "Account")' method = "POST">
+         <input type="hidden" name="nombre" value="1"/>
+            <input type="text" name="usuario" placeholder="email" class="form-control" required />
+            <input type="text" name="contraseña"  placeholder="contraseña" class="form-control" required />    
+</form> 
