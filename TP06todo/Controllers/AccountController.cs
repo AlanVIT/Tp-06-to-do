@@ -24,7 +24,7 @@ namespace TP06todo.Controllers
             int idUsuario = BD.Login(usuario, password);
             
             HttpContext.Session.SetString("IdUsuario", idUsuario.ToString());
-            return RedirectToAction("Index", "Home");
+            return View("Index");
         }
 
         [HttpGet]
