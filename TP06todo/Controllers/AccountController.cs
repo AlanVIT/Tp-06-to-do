@@ -13,22 +13,28 @@ namespace TP06todo.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult mostrarLogin()
         {
             return View("salaLogin");
         }
 
         [HttpPost]
-        public IActionResult verificarLogin(string usuario, string password)
+        public IActionResult Login(string usuario, string contraseña)
         {
-            int idUsuario = BD.Login(usuario, password);
-            
-            HttpContext.Session.SetString("IdUsuario", idUsuario.ToString());
-            return View("Index");
+            int userId = BD.Login(usuario, contraseña);
+            if (userId > 0)
+            {
+                HttpContext.Session.SetString("IdUsuario", userId.ToString());
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("salaLogin");
+            }
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult mostrarRegister()
         {
             return View("Register");
         }
@@ -40,10 +46,11 @@ namespace TP06todo.Controllers
             return RedirectToAction("Login");
         }
 
+        [HttpGet]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("index", "Home");
         }
     }
 }

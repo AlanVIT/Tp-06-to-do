@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="navbar">
+    <a class="navbar-brand" href="@Url.Action("Index", "Home")">TODO</a>
+</div>
+<div class="container">
+    <h1>Iniciar Sesión</h1>
+    <form action="@Url.Action("Login", "Account")" method="POST">
+        <div class="form-group">
+            <label for="usuario">Usuario</label>
+            <input type="text" name="usuario" id="usuario" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="contraseña">Contraseña</label>
+            <input type="password" name="contraseña" id="contraseña" class="form-control" required />
+        </div>
+        <button type="submit" class="btn">Ingresar</button>
+        <a href="@Url.Action("mostrarRegister", "Account")" class="btn btn-secondary">Registrarse</a>
+    </form>
+</div>

@@ -1,0 +1,113 @@
+@{
+    ViewData["Title"] = "Modificar Tarea";
+}
+
+<div class="navbar">
+    <a class="navbar-brand" href="@Url.Action("Index", "Home")">TO-DO</a>
+</div>
+<div class="container">
+    <h1>Modificar Tarea</h1>
+    <form action="@Url.Action("modificarTarea", "Home")" method="POST">
+        <input type="hidden" name="id" value="@ViewBag.tarea.Id" />
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" name="titulo" id="titulo" class="form-control" value="@ViewBag.tarea.Titulo" required />
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required>@ViewBag.tarea.Descripcion</textarea>
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" id="fecha" class="form-control" value="@ViewBag.tarea.Fecha.ToString("yyyy-MM-dd")" required />
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="finalizada" value="true" @(ViewBag.tarea.Finalizada ? "checked" : "") /> Finalizada
+            </label>
+        </div>
+        <button type="submit" class="btn">Guardar Cambios</button>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Volver</a>
+    </form>
+</div>
+
+<style>
+    .navbar {
+        background-color: #007bff;
+        padding: 10px;
+        color: white;
+        text-align: center;
+    }
+    
+    .navbar-brand {
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+    }
+    
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-right: 10px;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+    
+    .btn:hover {
+        opacity: 0.9;
+    }
+    
+    .form-actions {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>

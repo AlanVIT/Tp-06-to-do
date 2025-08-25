@@ -1,23 +1,23 @@
 namespace TP06todo.Models;
 
-public class Tarea{
+public class Tarea
+{
+    public int Id { get; set; }
+    public string Descripcion { get; set; }
+    public DateTime Fecha { get; set; }
+    public bool Finalizada { get; set; }
+    public int IdUsuario { get; set; }
+    public string Titulo { get; set; }
 
-    public int id { get; private set; }
-    public string descripcion { get; private set; }
-    public DateTime fecha { get; private set; }
-    public bool finalizada { get; private set; }
-    public int idUsuario { get; private set; }
-    public string titulo { get; private set; }
-    
-    public Tarea(int id, string descripcion, bool finalizada, int idUsuario, string titulo, DateTime fecha )
+    public Tarea() { }
+
+    public Tarea(int id, string descripcion, DateTime fecha, bool finalizada, int idUsuario, string titulo)
     {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
-        this.finalizada = finalizada;
-        this.idUsuario = idUsuario;
-        this.titulo = titulo;
-
+        Id = id;
+        Descripcion = descripcion;
+        Fecha = fecha;
+        Finalizada = finalizada;
+        IdUsuario = idUsuario;
+        Titulo = titulo;
     }
-
 }

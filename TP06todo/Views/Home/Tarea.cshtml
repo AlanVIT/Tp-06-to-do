@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "Detalle de Tarea";
+}
+
+<div class="container">
+    <h1>Detalle de Tarea</h1>
+    
+    @if (ViewBag.tarea != null)
+    {
+        <div class="tarea-detail">
+            <h2>@ViewBag.tarea.Titulo</h2>
+            <p><strong>Descripción:</strong> @ViewBag.tarea.Descripcion</p>
+            <p><strong>Fecha:</strong> @ViewBag.tarea.Fecha.ToString("dd/MM/yyyy")</p>
+            <p><strong>Estado:</strong> @(ViewBag.tarea.Finalizada ? "Completada" : "Pendiente")</p>
+            
+            <div class="tarea-actions">
+                <a href='@Url.Action("mostrarModificarTarea", "Home", new { id = ViewBag.tarea.Id })' class="btn btn-warning">Modificar</a>
+                <a href='@Url.Action("EliminarTarea", "Home", new { id = ViewBag.tarea.Id })' class="btn btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar esta tarea?')">Eliminar</a>
+                @if (!ViewBag.tarea.Finalizada)
+                {
+                    <a href='@Url.Action("finalizarTarea", "Home", new { id = ViewBag.tarea.Id })' class="btn btn-success">Finalizar</a>
+                }
+                <a href='@Url.Action("Index", "Home")' class="btn btn-secondary">Volver</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No se encontró la tarea solicitada.</p>
+        <a href='@Url.Action("Index", "Home")' class="btn btn-secondary">Volver</a>
+    }
+</div>
+
+<style>
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .tarea-detail {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        margin: 20px 0;
+    }
+    
+    .tarea-detail h2 {
+        margin-top: 0;
+        color: #333;
+    }
+    
+    .tarea-detail p {
+        margin: 10px 0;
+    }
+    
+    .tarea-actions {
+        margin-top: 20px;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-right: 10px;
+        text-decoration: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 14px;
+    }
+    
+    .btn-secondary { background-color: #6c757d; }
+    .btn-warning { background-color: #ffc107; color: #212529; }
+    .btn-danger { background-color: #dc3545; }
+    .btn-success { background-color: #28a745; }
+</style>

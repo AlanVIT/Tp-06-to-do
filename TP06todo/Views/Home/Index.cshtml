@@ -2,11 +2,19 @@
     ViewData["Title"] = "Index";
 }
 
-<div>
-    <h1>Index</h1>
-    <p>Bienvenidos a uno de los mejores administradores de tareas, haga click en Log in para iniciar sesion</p>
+<div class="navbar">
+    <div class="navbar-links">
+        <a href="@Url.Action("mostrarLogin", "Account")">Iniciar Sesión</a>
+        <a href="@Url.Action("mostrarRegister", "Account")">Registrarse</a>
+    </div>
 </div>
-
-<a class="btn-login" href='@Url.Action("Login","Account")'>Log in</a>
+<div class="container">
+    <h1>Bienvenido a TO-DO</h1>
+    <p>Organiza tus tareas de forma simple y eficiente.</p>
+    <div style="text-align:center; margin-top:32px;">
+        <a href="@Url.Action("mostrarLogin", "Account")" class="btn">Iniciar Sesión</a>
+        <a href="@Url.Action("mostrarRegister", "Account")" class="btn btn-secondary">Registrarse</a>
+    </div>
+</div>
 
 
