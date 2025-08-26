@@ -19344,11 +19344,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\49319580\\tp-06-to-do\\TP06todo\\Views\\Home\\mostrarTarea.cshtml",
-      "TargetPath": "Views\\Home\\mostrarTarea.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\49319580\\tp-06-to-do\\TP06todo\\Views\\Home\\modificarTarea.cshtml",
       "TargetPath": "Views\\Home\\modificarTarea.cshtml",
       "FileKind": "mvc"

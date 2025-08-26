@@ -2,6 +2,14 @@
     ViewData["Title"] = "Detalle de Tarea";
 }
 
+<div class="navbar">
+    <a class="navbar-brand" href="@Url.Action("Index", "Home")">TO-DO</a>
+    <div class="navbar-links">
+        <a href="@Url.Action("MostrarAgregarTarea", "Home")">Agregar Tarea</a>
+        <a href="@Url.Action("Logout", "Account")">Salir</a>
+    </div>
+</div>
+
 <div class="container">
     <h1>Detalle de Tarea</h1>
     
