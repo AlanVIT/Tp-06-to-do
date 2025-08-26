@@ -43,7 +43,7 @@ namespace TP06todo.Controllers
         public IActionResult Register(string nombre, string apellido, string usuario, string password, string foto)
         {
             BD.RegistrarUsuario(nombre, apellido, usuario, password, foto, DateTime.Now);
-            return RedirectToAction("Login");
+            return RedirectToAction("mostrarLogin");
         }
 
         [HttpGet]

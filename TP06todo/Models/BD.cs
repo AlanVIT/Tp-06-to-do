@@ -10,7 +10,7 @@ namespace TP06todo.Models;
 public static class BD
 {
 
-    private static string _connectionString = @"Server=localhost\SQLEXPRESS;Database=TP06ToDo;Integrated Security=True;TrustServerCertificate=True;";
+    private static string _connectionString = @"Server=localhost;Database=TP06ToDo;Integrated Security=True;TrustServerCertificate=True;";
 
     public static int Login(string usuario, string password)
     {
